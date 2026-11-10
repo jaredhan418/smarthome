@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  --background: #edf0f8;
+  --foreground: #22262d;
+  --card: #f7fbff;
+  --card-foreground: #22262d;
+  --primary: #171a20;
+  --primary-foreground: #f7fbff;
+  --muted: #e8ebf3;
+  --muted-foreground: #7a7c80;
+  --border: #dfe3e9;
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: #d8e9ff;
+  color: #111318;
+}
+
+.ai-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d9dde3 transparent;
+}
+
+.ai-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ai-scroll::-webkit-scrollbar-thumb {
+  border-radius: 99px;
+  background: #d9dde3;
+}
+
+.typing-dot {
+  animation: typing 1s infinite ease-in-out;
+}
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+.dialog-backdrop {
+  animation: fade-in 160ms ease-out;
+}
+
+.dialog-popup {
+  animation: sheet-in 200ms ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sheet-in {
+  from { translate: 0 100%; }
+  to { translate: 0 0; }
+}
+
+@media (min-width: 640px) {
+  .dialog-popup {
+    animation-name: sheet-in-centered;
+  }
+}
+
+@keyframes sheet-in-centered {
+  from { translate: -50% 100%; }
+  to { translate: -50% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
