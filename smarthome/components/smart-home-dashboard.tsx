@@ -32,6 +32,7 @@ import {
   Zap,
 } from "lucide-react";
 import { AiPanel } from "@/components/ai-panel";
+import { DailyFamilyReport } from "@/components/daily-family-report";
 import { DeviceCard } from "@/components/device-card";
 import { VideoMonitoring } from "@/components/video-monitoring";
 import { Badge } from "@/components/ui/badge";
@@ -159,6 +160,9 @@ export function SmartHomeDashboard() {
     if (/状态|怎么样|情况/.test(command)) {
       return `家中目前 ${onlineCount} 台设备在线，${activeCount} 台正在运行。平均温度 23.7°C，湿度 47%，空气质量为优。安防系统正常，没有发现异常。`;
     }
+    if (/总结|报告/.test(command)) {
+      return "今日家中温湿度处于舒适区间，平均温度 23.7°C、湿度 47%。猫咪进食 4 次，共 128g；夜间起身 2 次，睡眠 11 小时 26 分钟，睡眠质量 86 分。整体状态良好，建议继续留意饮水量。";
+    }
     if (/能耗|用电|电费/.test(command)) {
       return `今日已用电 18.6 kWh，比昨天同期下降 12%。当前实时功率约 ${(power / 1000).toFixed(2)} kW，空调与热水器是主要耗电设备。建议在午后启用新风替代部分制冷。`;
     }
@@ -177,7 +181,7 @@ export function SmartHomeDashboard() {
         </a>
         <button className="mt-8 flex w-full items-center gap-3 rounded-xl border border-white/8 bg-white/[0.045] p-3 text-left transition-colors hover:bg-white/[0.08]">
           <span className="flex size-8 items-center justify-center rounded-lg bg-[#292f38] text-[#d8e9ff]"><House size={16} /></span>
-          <span className="min-w-0 flex-1"><span className="block text-xs font-medium">Jared 的家</span><span className="mt-0.5 block text-[9px] text-[#999ca0]">杭州 · 西溪公寓</span></span>
+          <span className="min-w-0 flex-1"><span className="block text-xs font-medium">Jared 的家</span><span className="mt-0.5 block text-[9px] text-[#999ca0]">北京 · 晓风印月</span></span>
           <ChevronDown size={14} className="text-[#999ca0]" />
         </button>
         <p className="mb-2 mt-8 px-3 text-[9px] font-medium tracking-[0.18em] text-[#7f8185]">控制中心</p>
@@ -220,7 +224,7 @@ export function SmartHomeDashboard() {
             <section id="overview" className="scroll-mt-24">
               <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
                 <div>
-                  <div className="mb-2 flex items-center gap-2 text-[10px] font-medium tracking-[0.14em] text-[#8a8c90]"><span>11月10日 · 星期二</span><span className="h-3 w-px bg-[#d2d5db]" /><span>杭州</span></div>
+                  <div className="mb-2 flex items-center gap-2 text-[10px] font-medium tracking-[0.14em] text-[#8a8c90]"><span>11月10日 · 星期二</span><span className="h-3 w-px bg-[#d2d5db]" /><span>北京</span></div>
                   <h1 className="text-[28px] font-semibold tracking-[-0.045em] text-[#2d2d2f] md:text-[34px]">欢迎回家，Jared。</h1>
                   <p className="mt-2 text-xs leading-relaxed text-[#828488] md:text-[13px]">家是懂你的空间，一切都已为你准备妥当。</p>
                 </div>
@@ -253,6 +257,8 @@ export function SmartHomeDashboard() {
                 </Card>
               </div>
             </section>
+
+            <DailyFamilyReport />
 
             <section id="scenes" className="mt-8 scroll-mt-24">
               <div className="mb-3 flex items-center justify-between"><h2 className="text-sm font-semibold">快捷场景</h2><span className="text-[10px] text-[#95989c]">一键切换家的模样</span></div>
